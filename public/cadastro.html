@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AquaTech | Cadastro</title>
+  <title>iPhones | Cadastro</title>
 
   <script src="./js/sessao.js"></script>
 
   <link rel="stylesheet" href="./css/estilo.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="icon" href="./assets/icon/apple_logo_icon_147318.svg" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
@@ -19,13 +19,13 @@
   <!--header inicio-->
   <div class="header">
     <div class="container">
-      <h1 class="titulo">AquaTech</h1>
+      <h1 class="titulo">iPhones | Minha Pequena Coleção</h1>
       <ul class="navbar">
         <li>
           <a href="index.html">Inicial</a>
         </li>
         <li>
-          <a href="simulador.html">Simulador</a>
+          <a href="simulador.html">Quiz</a>
         </li>
         <li>|</li>
         <li>
@@ -53,10 +53,6 @@
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
                      -->
-          <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
@@ -87,7 +83,7 @@
   <!--footer inicio-->
   <div class="footer">
     <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+      <h4>De um grande fã &copy; 2026</h4>
       <span class="version">v1.0.0</span>
     </div>
   </div>
@@ -110,16 +106,14 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular
+
 
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == ""
+      confirmacaoSenhaVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -156,7 +150,6 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
       }),
     })
       .then(function (resposta) {
@@ -186,26 +179,8 @@
     return false;
   }
 
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
 
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
+  // Mudar para vetor/repetição
   function sumirMensagem() {
     cardErro.style.display = "none";
   }

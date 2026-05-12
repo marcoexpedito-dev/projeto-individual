@@ -1,82 +1,266 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Simulador</title>
-
-    <script src="./js/sessao.js"></script>
-
+    <title>iPhones | Quiz</title>
+    <link rel="icon" href="./assets/icon/apple_logo_icon_147318.svg">
     <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+
+
 </head>
 
 <body>
 
-    <!--header inicio-->
+
     <div class="header">
         <div class="container">
-            <h1 class="titulo">AquaTech</h1>
+            <h1 class="titulo">iPhones | Minha Pequena Coleção</h1>
             <ul class="navbar">
-                <li>
-                    <a href="./index.html">Inicial</a>
-                </li>
-                <li class="agora">Simulador</li>
+                <li><a href="index.html">Inicial</a></li>
                 <li>|</li>
-                <li>
-                    <a href="./login.html">Login</a>
-                </li>
-                <li>
-                    <a href="./login.html">Cadastro</a>
-                </li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
             </ul>
         </div>
     </div>
 
+    <div class="banner-quiz">
+        <div class="container">
+            <p>Quanto você sabe sobre <span>os iPhones</span> da coleção?</p>
+        </div>
+    </div>
 
-    <!-- simulador inicio -->
+
     <div class="simulador">
         <div class="container">
-            <h2>Simulador</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
+
+            <div class="progresso-wrap" id="progressoWrap">
+                <div class="progresso-meta">
+                    <span id="labelPergunta">Pergunta 1 de 10</span>
+                    <span id="labelAcertos">0 acertos</span>
+                </div>
+                <div class="progresso-trilha">
+                    <div class="progresso-fill" id="progressoFill" style="width:10%"></div>
+                </div>
+            </div>
+
+
+            <div id="blocoQuestao" style="width:100%; display:flex; flex-direction:column; gap:16px;">
+
+                <div class="pergunta-card">
+                    <p class="pergunta-numero" id="perguntaNumero">Pergunta 1</p>
+                    <p class="pergunta-texto" id="perguntaTexto">Carregando...</p>
+                </div>
+
+                <div class="opcoes-grid" id="opcoesGrid"></div>
+
+                <div class="feedback" id="feedback">
+                    <strong id="feedbackTitulo"></strong>
+                    <span id="feedbackDesc"></span>
+                </div>
+
+                <button class="proximo-btn" id="proximoBtn" onclick="proximaPergunta()">
+                    Próxima pergunta →
+                </button>
+
+            </div>
+
+            <div class="resultado-card" id="resultadoCard">
+                <span class="resultado-icone" id="resultadoIcone">🏆</span>
+                <div class="resultado-placar" id="resultadoPlacar">0</div>
+                <div class="resultado-total" id="resultadoTotal">de 10 acertos</div>
+                <h3 class="resultado-titulo" id="resultadoTitulo"></h3>
+                <p class="resultado-desc" id="resultadoDesc"></p>
+                <button class="reiniciar-btn" onclick="reiniciarQuiz()">Tentar novamente</button>
+            </div>
 
         </div>
     </div>
-    <!-- simulador fim -->
 
-    <!--footer inicio-->
+
     <div class="footer">
         <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+            <h4>De um grande fã &copy; 2026</h4>
             <span class="version">v1.0.0</span>
         </div>
     </div>
-    <!--footer fim-->
 
+    <script>
+        const perguntas = [
+            {
+                q: "Qual iPhone foi o primeiro a apresentar a tecnologia Retina Display?",
+                opts: ["iPhone 3GS", "iPhone 4", "iPhone 5", "iPhone 6"],
+                resposta: 1,
+                explicacao: "O iPhone 4 revolucionou os displays ao introduzir a Retina Display, com resolução tão alta que os pixels ficam imperceptíveis ao olho humano."
+            },
+            {
+                q: "O iPhone 5 foi o primeiro da linha a usar qual conector?",
+                opts: ["USB-C", "Micro-USB", "Lightning", "30 pinos"],
+                resposta: 2,
+                explicacao: "Lançado em 2012, o iPhone 5 abandonou o conector de 30 pinos e introduziu o Lightning, muito mais compacto e reversível."
+            },
+            {
+                q: "Qual inovação exclusiva o iPhone 6s trouxe na tela?",
+                opts: ["OLED", "Retina Display", "3D Touch", "ProMotion 120Hz"],
+                resposta: 2,
+                explicacao: "O 3D Touch era sensível à pressão e permitia ações diferentes dependendo de como você pressionava a tela."
+            },
+            {
+                q: "O iPhone SE (1ª geração) usava o mesmo processador de qual modelo?",
+                opts: ["iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 5s"],
+                resposta: 1,
+                explicacao: "Apesar do design compacto do 5s, o SE vinha com o chip A9 do iPhone 6s, entregando alto desempenho em formato pequeno."
+            },
+            {
+                q: "Qual certificação de resistência à água o iPhone 7 possuía?",
+                opts: ["IP68", "IP67", "IP65", "IPX4"],
+                resposta: 1,
+                explicacao: "O iPhone 7 foi o primeiro da linha a receber certificação IP67, resistente a até 1 metro d'água por 30 minutos."
+            },
+            {
+                q: "O iPhone 7 foi o primeiro da linha a remover qual componente físico?",
+                opts: ["Botão Home", "Slot de chip", "Conector de fones P2", "Câmera frontal"],
+                resposta: 2,
+                explicacao: "O iPhone 7 removeu o conector P2 de 3,5mm para fones de ouvido, substituindo-o pelo adaptador Lightning."
+            },
+            {
+                q: "O iPhone X foi lançado para celebrar quantos anos do iPhone?",
+                opts: ["5 anos", "8 anos", "10 anos", "15 anos"],
+                resposta: 2,
+                explicacao: "O 'X' representa o numeral romano 10 — lançado em 2017 para marcar uma década desde o iPhone original."
+            },
+            {
+                q: "Qual tecnologia o iPhone X introduziu para substituir o Touch ID?",
+                opts: ["Face ID", "Iris Scanner", "Fingerprint sob tela", "PIN obrigatório"],
+                resposta: 0,
+                explicacao: "O Face ID usa a câmera TrueDepth com sensores infravermelhos e mapeamento facial 3D para reconhecimento seguro."
+            },
+            {
+                q: "Que tipo de tela o iPhone X trouxe como novidade para a linha principal?",
+                opts: ["LCD IPS", "AMOLED", "OLED", "Mini-LED"],
+                resposta: 2,
+                explicacao: "O iPhone X estreou com tela OLED de 5,8 polegadas borda a borda, com contraste superior ao LCD dos modelos anteriores."
+            },
+            {
+                q: "Qual iPhone da coleção foi o mais vendido mundialmente em 2019?",
+                opts: ["iPhone X", "iPhone XS", "iPhone XR", "iPhone 8"],
+                resposta: 2,
+                explicacao: "Com preço mais acessível, cores vibrantes e chip A12 Bionic, o iPhone XR dominou as vendas globais em 2019."
+            }
+        ];
 
+        let atual = 0;
+        let acertos = 0;
+        let respondeu = false;
+        const letras = ['A', 'B', 'C', 'D'];
+
+        function embaralhar(arr) {
+            return [...arr].sort(() => Math.random() - 0.5);
+        }
+
+        let listaPerguntas = embaralhar(perguntas);
+
+        function renderPergunta() {
+            const p = listaPerguntas[atual];
+            const total = listaPerguntas.length;
+
+            document.getElementById('perguntaNumero').textContent = `Pergunta ${atual + 1}`;
+            document.getElementById('perguntaTexto').textContent = p.q;
+            document.getElementById('labelPergunta').textContent = `Pergunta ${atual + 1} de ${total}`;
+            document.getElementById('labelAcertos').textContent = `${acertos} acerto${acertos !== 1 ? 's' : ''}`;
+            document.getElementById('progressoFill').style.width = `${((atual + 1) / total) * 100}%`;
+
+            const grid = document.getElementById('opcoesGrid');
+            grid.innerHTML = '';
+            p.opts.forEach((texto, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'opcao-btn';
+                btn.setAttribute('data-index', i);
+
+                const letraSpan = document.createElement('span');
+                letraSpan.className = 'letra';
+                letraSpan.textContent = letras[i];
+
+                btn.appendChild(letraSpan);
+                btn.appendChild(document.createTextNode(texto));
+                btn.onclick = () => selecionarResposta(btn, i, p.resposta, p.explicacao);
+                grid.appendChild(btn);
+            });
+
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('proximoBtn').className = 'proximo-btn';
+            respondeu = false;
+        }
+
+        function selecionarResposta(btn, escolha, correta, explicacao) {
+            if (respondeu) return;
+            respondeu = true;
+
+            document.querySelectorAll('.opcao-btn').forEach(b => {
+                b.disabled = true;
+                if (parseInt(b.getAttribute('data-index')) === correta) b.classList.add('correta');
+            });
+
+            const fb = document.getElementById('feedback');
+            if (escolha === correta) {
+                acertos++;
+                btn.classList.add('correta');
+                fb.className = 'feedback correta-fb mostrar';
+                document.getElementById('feedbackTitulo').textContent = '✓ Correto!';
+            } else {
+                btn.classList.add('errada');
+                fb.className = 'feedback errada-fb mostrar';
+                document.getElementById('feedbackTitulo').textContent = '✗ Errou!';
+            }
+            document.getElementById('feedbackDesc').textContent = explicacao;
+            document.getElementById('labelAcertos').textContent = `${acertos} acerto${acertos !== 1 ? 's' : ''}`;
+
+            const proxBtn = document.getElementById('proximoBtn');
+            proxBtn.textContent = atual < listaPerguntas.length - 1 ? 'Próxima pergunta →' : 'Ver resultado →';
+            proxBtn.className = 'proximo-btn visivel';
+        }
+
+        function proximaPergunta() {
+            atual++;
+            if (atual >= listaPerguntas.length) mostrarResultado();
+            else renderPergunta();
+        }
+
+        function mostrarResultado() {
+            document.getElementById('blocoQuestao').style.display = 'none';
+            document.getElementById('progressoWrap').style.display = 'none';
+
+            const total = listaPerguntas.length;
+            const pct = acertos / total;
+            let icone, titulo, desc;
+
+            if (pct === 1) { icone = '🏆'; titulo = 'Perfeito!'; desc = 'Incrível — você acertou tudo! É um verdadeiro especialista na coleção.'; }
+            else if (pct >= 0.7) { icone = '🎯'; titulo = 'Muito bem!'; desc = 'Você conhece bastante sobre os iPhones da coleção. Quase lá para o placar perfeito!'; }
+            else if (pct >= 0.4) { icone = '📱'; titulo = 'Bom esforço!'; desc = 'Você sabe o básico! Que tal rever os modelos na página inicial e tentar de novo?'; }
+            else { icone = '🤔'; titulo = 'Continue estudando!'; desc = 'Não desanime! Explore a coleção na página inicial e volte mais preparado.'; }
+
+            document.getElementById('resultadoIcone').textContent = icone;
+            document.getElementById('resultadoPlacar').textContent = acertos;
+            document.getElementById('resultadoTotal').textContent = `de ${total} acertos`;
+            document.getElementById('resultadoTitulo').textContent = titulo;
+            document.getElementById('resultadoDesc').textContent = desc;
+            document.getElementById('resultadoCard').className = 'resultado-card mostrar';
+        }
+
+        function reiniciarQuiz() {
+            atual = 0; acertos = 0; respondeu = false;
+            listaPerguntas = embaralhar(perguntas);
+            document.getElementById('blocoQuestao').style.display = 'flex';
+            document.getElementById('progressoWrap').style.display = 'block';
+            document.getElementById('resultadoCard').className = 'resultado-card';
+            renderPergunta();
+        }
+
+        renderPergunta();
+    </script>
 </body>
 
 </html>
