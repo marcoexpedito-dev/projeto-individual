@@ -1,96 +1,439 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>iPhones | Página Inicial</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
     <link rel="icon" href="./assets/icon/apple_logo_icon_147318.svg">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="./js/sessao.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/calculadora.css">
+    <link rel="stylesheet" href="./css/index.css">
+
 </head>
 
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">iPhones | Minha Pequena Coleção</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Quiz</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Incrível <span>por</span> dentro e <span> por fora</span>.</p>
-      </div>
-    </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/iphone4.png">
-            <h4>iPhone 4</h4>
-            <p>O iPhone 4, é um ícone do design industrial, unindo vidro e aço inoxidável em um formato sofisticado. Ele introduziu a Retina Display e o FaceTime, revolucionando a forma como consumimos mídia e nos comunicamos. Sua interface clássica utiliza o esqueuomorfismo para simular texturas da vida real nos ícones. É amplamente lembrado como um dos aparelhos mais elegantes já feitos pela Apple.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/iphone-5.png">
-            <h4>iPhone 5</h4>
-            <p>O iPhone 5, lançado em setembro de 2012, foi o primeiro iPhone com tela de 4 polegadas (widescreen 16:9), processador A6 e conector Lightning (substituindo o de 30 pinos). Com design em alumínio anodizado, era mais fino e leve que seus antecessores. Rodava iOS 6 e suportava redes 4G LTE, sendo um marco importante na evolução da linha.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/iphone-6s.png">
-            <h4>iPhone 6s</h4>
-            <p>O iPhone 6s, lançado em setembro de 2015, manteve o design do iPhone 6 com tela de 4,7 polegadas, mas trouxe melhorias significativas internamente. O grande destaque foi o 3D Touch, tecnologia sensível à pressão na tela, além do processador A9 e câmera traseira de 12 MP. Também introduziu o Touch ID de segunda geração, muito mais rápido, e rodava iOS 9.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/iphone-se.png">
-            <h4>iPhone SE</h4>
-            <p>O iPhone SE (1ª geração), lançado em março de 2016, combinou o design compacto do iPhone 5s com o desempenho interno do iPhone 6s, incluindo o processador A9 e câmera de 12 MP. Foi voltado para quem preferia telas menores de 4 polegadas e um preço mais acessível. Suportava 3D Touch apenas parcialmente e rodava iOS 9, sendo muito bem recebido por oferecer alto desempenho em formato compacto.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/iphone-7.png">
-            <h4>iPhone 7</h4>
-            <p>O iPhone 7, lançado em setembro de 2016, foi marcado pela remoção do conector de fones de ouvido P2, substituído pelo adaptador Lightning. Trouxe o processador A10 Fusion, câmera traseira de 12 MP com estabilização óptica melhorada e, pela primeira vez, resistência à água (certificação IP67). O modelo Plus estreou com câmera dupla, e ambos chegaram com a nova cor Preto Matte.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/iphone-x.png">
-            <h4>iPhone X</h4>
-            <p>O iPhone X, lançado em novembro de 2017 para celebrar os 10 anos do iPhone, trouxe uma revolução no design com tela OLED de 5,8 polegadas de borda a borda, eliminando o botão Home. Introduziu o Face ID como substituto ao Touch ID e o famoso "notch" na parte superior. Equipado com o processador A11 Bionic, também estreou a câmera frontal TrueDepth com suporte a Animojis.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/iphone-xr.png">
-            <h4>iPhone XR</h4>
-            <p>O iPhone XR, lançado em outubro de 2018, foi a opção mais acessível da linha X, com tela LCD de 6,1 polegadas e disponível em diversas cores vibrantes. Apesar de ter câmera traseira simples (sem dupla), entregava desempenho próximo ao XS graças ao processador A12 Bionic. Suportava Face ID e teve excelente duração de bateria, tornando-se o iPhone mais vendido de 2019.</p>
-          </div>
+
+    <header>
+
+        <div class="marca-cabecalho">
+            iPhones |
+            <span>Minha Pequena Coleção</span>
         </div>
-      </div>
+
+        <nav>
+            <a href="#" class="ativo">
+                Início
+            </a>
+
+            <a href="cadastro.html">
+                Cadastro
+            </a>
+
+            <a href="login.html" class="botao-login">
+                Acessar →
+            </a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="conteudo-hero">
+
+            <p class="etiqueta-hero">
+                Coleção pessoal · 7 modelos
+            </p>
+
+            <h1 class="titulo-hero">
+                Incrível<br>
+                <span>por dentro</span><br>
+                e por fora.
+            </h1>
+
+            <p class="subtitulo-hero">
+                Uma jornada pelo design e inovação da Apple —
+                do icônico iPhone 4 ao revolucionário iPhone XR.
+            </p>
+
+            <div class="acoes-hero">
+
+                <a href="#colecao" class="botao-primario">
+                    Ver a coleção
+                </a>
+
+                <a href="login.html" class="botao-secundario">
+                    Fazer login
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="barra-estatisticas">
+
+        <div class="estatistica">
+            <div class="numero-estatistica">7</div>
+            <div class="rotulo-estatistica">
+                Modelos
+            </div>
+        </div>
+
+        <div class="estatistica">
+            <div class="numero-estatistica">2010</div>
+            <div class="rotulo-estatistica">
+                Início
+            </div>
+        </div>
+
+        <div class="estatistica">
+            <div class="numero-estatistica">2018</div>
+            <div class="rotulo-estatistica">
+                Último
+            </div>
+        </div>
+
+        <div class="estatistica">
+            <div class="numero-estatistica">8+</div>
+            <div class="rotulo-estatistica">
+                Anos de história
+            </div>
+        </div>
+
     </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>De um grande fã  &copy; 2026</h4>
-        <span class="version">v1.0.0</span>
-      </div>
+
+    <section class="colecao" id="colecao">
+
+        <div class="cabecalho-secao">
+
+            <p class="etiqueta-secao">
+                A coleção
+            </p>
+
+            <h2 class="titulo-secao">
+                Cada modelo, uma história.
+            </h2>
+
+        </div>
+
+        <div class="grade-iphones">
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone4.png" alt="iPhone 4">
+                </div>
+
+                <span class="modelo-card">
+                    2010
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone 4
+                </h3>
+
+                <p class="descricao-card">
+                    Ícone do design industrial com vidro
+                    e aço inoxidável. Introduziu a
+                    Retina Display e o FaceTime.
+                </p>
+
+            </div>
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone-5.png" alt="iPhone 5">
+                </div>
+
+                <span class="modelo-card">
+                    2012
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone 5
+                </h3>
+
+                <p class="descricao-card">
+                    Primeiro iPhone com tela de
+                    4 polegadas widescreen,
+                    processador A6 e conector Lightning.
+                </p>
+
+            </div>
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone-6s.png" alt="iPhone 6s">
+                </div>
+
+                <span class="modelo-card">
+                    2015
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone 6s
+                </h3>
+
+                <p class="descricao-card">
+                    Trouxe o 3D Touch, processador A9
+                    e câmera de 12 MP.
+                    Touch ID de segunda geração.
+                </p>
+
+            </div>
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone-se.png" alt="iPhone SE">
+                </div>
+
+                <span class="modelo-card">
+                    2016
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone SE
+                </h3>
+
+                <p class="descricao-card">
+                    Design compacto do 5s com o
+                    desempenho interno do 6s.
+                    Perfeito para quem prefere telas menores.
+                </p>
+
+            </div>
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone-7.png" alt="iPhone 7">
+                </div>
+
+                <span class="modelo-card">
+                    2016
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone 7
+                </h3>
+
+                <p class="descricao-card">
+                    Removeu o P2, trouxe resistência
+                    à água IP67 e o processador A10 Fusion.
+                </p>
+
+            </div>
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone-x.png" alt="iPhone X">
+                </div>
+
+                <span class="modelo-card">
+                    2017
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone X
+                </h3>
+
+                <p class="descricao-card">
+                    Revolução no design:
+                    tela OLED de borda a borda,
+                    Face ID e processador A11 Bionic.
+                </p>
+
+            </div>
+
+            <div class="card-iphone">
+
+                <div class="container-imagem-card">
+                    <img src="assets/imgs/iphone-xr.png" alt="iPhone XR">
+                </div>
+
+                <span class="modelo-card">
+                    2018
+                </span>
+
+                <h3 class="nome-card">
+                    iPhone XR
+                </h3>
+
+                <p class="descricao-card">
+                    Tela LCD de 6,1 polegadas
+                    em cores vibrantes.
+                    O iPhone mais vendido de 2019.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="chamada-quiz">
+
+        <div class="texto-chamada-quiz">
+
+            <h3>
+                Quanto você sabe sobre a coleção?
+            </h3>
+
+            <p>
+                Faça o quiz e descubra o quanto
+                você conhece sobre cada modelo.
+                Acompanhe seu desempenho
+                em tempo real nos gráficos.
+            </p>
+
+            <br><br>
+
+            <a href="login.html" class="botao-primario">
+                Fazer o quiz →
+            </a>
+
+        </div>
+
     </div>
-  </body>
+
+    <div class="calc-secao">
+
+        <div class="calc-cabecalho">
+            <div class="calc-cabecalho-texto">
+                <h3>Qual iPhone nasceu com você?</h3>
+                <p>Digite seu ano de nascimento e descubra o modelo lançado naquele momento.</p>
+            </div>
+            <p class="etiqueta-secao" style="margin:0">Calculadora</p>
+        </div>
+
+        <div class="calc-corpo">
+
+            <div class="calc-input">
+                <div class="calc-input-wrap">
+                    <label class="calc-rotulo" for="calcAno">Ano de nascimento</label>
+                    <input type="number" id="calcAno" class="calc-campo" placeholder="1998" min="1900" max="2025" />
+                    <div class="calc-erro" id="calcErro"></div>
+                </div>
+                <button class="calc-btn" onclick="calcularInline()">
+                    Descobrir →
+                </button>
+            </div>
+
+            <div class="calc-resultado" id="calcResultado">
+                <p class="calc-placeholder">← seu resultado aparece aqui</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const iphonesData = [
+            { ano: 2007, modelo: "iPhone (1ª Geração)", chip: "Samsung ARM", camera: "2 MP", tela: '3.5"' },
+            { ano: 2008, modelo: "iPhone 3G", chip: "Samsung ARM", camera: "2 MP", tela: '3.5"' },
+            { ano: 2009, modelo: "iPhone 3GS", chip: "ARM Cortex-A8", camera: "3 MP", tela: '3.5"' },
+            { ano: 2010, modelo: "iPhone 4", chip: "Apple A4", camera: "5 MP", tela: '3.5" Retina' },
+            { ano: 2011, modelo: "iPhone 4S", chip: "Apple A5", camera: "8 MP", tela: '3.5" Retina' },
+            { ano: 2012, modelo: "iPhone 5", chip: "Apple A6", camera: "8 MP", tela: '4" Retina' },
+            { ano: 2013, modelo: "iPhone 5s / 5c", chip: "Apple A7 (64-bit)", camera: "8 MP", tela: '4"' },
+            { ano: 2014, modelo: "iPhone 6 / 6 Plus", chip: "Apple A8", camera: "8 MP", tela: '4.7" / 5.5"' },
+            { ano: 2015, modelo: "iPhone 6s / 6s Plus", chip: "Apple A9", camera: "12 MP", tela: '4.7" / 5.5"' },
+            { ano: 2016, modelo: "iPhone 7 / SE", chip: "Apple A10 Fusion", camera: "12 MP", tela: '4.7" / 4"' },
+            { ano: 2017, modelo: "iPhone X / 8 / 8 Plus", chip: "Apple A11 Bionic", camera: "12 MP", tela: '5.8" OLED' },
+            { ano: 2018, modelo: "iPhone XS / XR", chip: "Apple A12 Bionic", camera: "12 MP", tela: '5.8" / 6.1"' },
+            { ano: 2019, modelo: "iPhone 11 / Pro", chip: "Apple A13 Bionic", camera: "12 MP", tela: '6.1" / 5.8"' },
+            { ano: 2020, modelo: "iPhone 12 / Mini", chip: "Apple A14 (5nm)", camera: "12 MP", tela: '6.1" / 5.4"' },
+            { ano: 2021, modelo: "iPhone 13 / Pro", chip: "Apple A15 Bionic", camera: "12 MP", tela: '6.1" ProMotion' },
+            { ano: 2022, modelo: "iPhone 14 / Pro", chip: "A15 / A16 Bionic", camera: "48 MP", tela: '6.1" OLED' },
+            { ano: 2023, modelo: "iPhone 15 / Pro", chip: "A16 / A17 Pro", camera: "48 MP", tela: '6.1" OLED' },
+            { ano: 2024, modelo: "iPhone 16 / Pro", chip: "A18 / A18 Pro", camera: "48 MP", tela: '6.1" / 6.3"' },
+            { ano: 2025, modelo: "iPhone 17/ Pro/ Pro Max", chip: "A19/ A19 Pro", camera: "48MP", tela: '6.1" / 6.3' }
+        ];
+
+        function calcularInline() {
+            const campo = document.getElementById("calcAno");
+            const erroEl = document.getElementById("calcErro");
+            const resEl = document.getElementById("calcResultado");
+
+            const ano = parseInt(campo.value);
+
+            erroEl.style.display = "none";
+
+
+            if (!ano || isNaN(ano) || ano < 1900 || ano > 2025) {
+                erroEl.textContent = "Insira um ano entre 1900 e 2025.";
+                erroEl.style.display = "block";
+                return;
+            }
+
+
+            let iphone = iphonesData.find(function (i) { return i.ano === ano; });
+            let labelAno = String(ano);
+
+            if (!iphone) {
+                if (ano < 2007) {
+                    iphone = iphonesData[0];
+                } else {
+                    iphone = iphonesData[iphonesData.length - 1];
+                    labelAno = iphone.ano + " (mais recente)";
+                }
+            }
+
+
+            const idadeNaEpoca = iphone.ano - ano;
+            const anosSinceLaunch = 2025 - iphone.ano;
+
+
+            let fraseIdade;
+            if (idadeNaEpoca < 0) {
+                fraseIdade = "Você <strong>ainda não havia nascido</strong> quando saiu.";
+            } else if (idadeNaEpoca === 0) {
+                fraseIdade = "Você nasceu <strong>no mesmo ano</strong> deste iPhone!";
+            } else {
+                fraseIdade = "Você tinha <strong>" + idadeNaEpoca + " anos</strong> quando saiu · " + anosSinceLaunch + " anos atrás.";
+            }
+
+            resEl.classList.add("tem-resultado");
+            resEl.innerHTML = `
+                <p class="calc-res-label">iPhone de ${labelAno}</p>
+                <p class="calc-res-modelo">${iphone.modelo}</p>
+                <p class="calc-res-info">${fraseIdade}</p>
+                <div class="calc-res-specs">
+                    <span class="calc-spec"><b>Chip</b> ${iphone.chip}</span>
+                    <span class="calc-spec"><b>Câmera</b> ${iphone.camera}</span>
+                    <span class="calc-spec"><b>Tela</b> ${iphone.tela}</span>
+                </div>
+            `;
+        }
+
+
+        document.getElementById("calcAno").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") calcularInline();
+        });
+    </script>
+
+    <footer>
+
+        <span>
+            De um grande fã &copy; 2026
+        </span>
+
+        <span class="versao">
+            v1.0.0
+        </span>
+
+    </footer>
+
+</body>
 
 </html>

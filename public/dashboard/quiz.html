@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhones | Quiz</title>
+    <link rel="icon" href="./assets/icon/apple_logo_icon_147318.svg">
+    <script src="./js/sessao.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/calculadora.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+
+<body onload="carregarPerguntas()">
+
+    <header>
+        <div class="marca-cabecalho">
+            iPhones | <span>Minha Pequena Coleção</span>
+        </div>
+        <nav>
+            <a href="../index.html">Início</a>
+            <a href="../cadastro.html">Cadastro</a>
+            <a href="../login.html" class="botao-login">Acessar →</a>
+        </nav>
+    </header>
+
+    <section class="hero hero-quiz">
+        <div class="conteudo-hero container-quiz">
+            <p class="etiqueta-hero">Desafio · Quiz</p>
+            <h1 class="titulo-hero-quiz">
+                Quanto você sabe sobre os <span>iPhones</span> da coleção?
+            </h1>
+        </div>
+    </section>
+
+    <div class="calc-secao container-quiz painel-quiz">
+
+        <div class="progresso-wrap" id="progressoWrap">
+            <div class="progresso-meta">
+                <span id="labelPergunta" class="texto-branco">Pergunta 1 de 10</span>
+                <span id="labelAcertos" class="texto-azul">0 acertos</span>
+            </div>
+            <div class="progresso-trilha">
+                <div class="progresso-fill" id="progressoFill"></div>
+            </div>
+        </div>
+
+        <div id="blocoQuestao" class="bloco-questao">
+
+            <div class="pergunta-card">
+                <p class="pergunta-numero" id="perguntaNumero">Pergunta 1</p>
+                <p class="pergunta-texto" id="perguntaTexto">Carregando...</p>
+            </div>
+
+            <div class="opcoes-grid" id="opcoesGrid"></div>
+
+            <div class="feedback" id="feedback">
+                <strong id="feedbackTitulo"></strong>
+                <span id="feedbackDesc"></span>
+            </div>
+
+            <button class="botao-primario btn-proximo" id="proximoBtn" onclick="proximaPergunta()">
+                Próxima pergunta &rarr;
+            </button>
+
+        </div>
+
+        <div class="resultado-card" id="resultadoCard">
+            <span class="resultado-icone" id="resultadoIcone">&#127942;</span>
+            <div class="resultado-placar" id="resultadoPlacar">0</div>
+            <div class="resultado-total" id="resultadoTotal">de 10 acertos</div>
+            <h3 class="resultado-titulo" id="resultadoTitulo"></h3>
+            <p class="resultado-desc" id="resultadoDesc"></p>
+            <button class="botao-primario btn-reiniciar" onclick="reiniciarQuiz()">Tentar novamente</button>
+            <br><br>
+            <button class="botao-primario btn-reiniciar" ><a href="./dashboard.html">Voltar</a></button>
+        </div>
+
+    </div>
+
+    <footer>
+        <span>De um grande fã &copy; 2026</span>
+        <span class="versao">v1.0.0</span>
+    </footer>
+
+    <script>
+        let listaPerguntas = [];
+        let atual = 0;
+        let acertos = 0;
+        let respondeu = false;
+        const letras = ['A', 'B', 'C', 'D'];
+        let fkUsuario;
+
+        function carregarPerguntas() {
+            fkUsuario = sessionStorage.ID_USUARIO;
+            console.log('fkUsuario:', fkUsuario);
+
+            fetch('/perguntas/listarTodas', { cache: 'no-store' })
+                .then(res => {
+                    if (!res.ok) throw new Error('Erro ao buscar perguntas');
+                    return res.json();
+                })
+                .then(dados => {
+                    listaPerguntas = embaralhar(dados).map(p => ({
+                        ...p,
+                        opts: embaralhar(p.opts)
+                    }));
+                    renderPergunta();
+                })
+                .catch(err => {
+                    console.error('Erro ao carregar perguntas:', err);
+                    document.getElementById('perguntaTexto').textContent =
+                        'Erro ao carregar perguntas. Tente recarregar a página.';
+                });
+        }
+
+        function embaralhar(arr) {
+            return [...arr].sort(() => Math.random() - 0.5);
+        }
+
+        function renderPergunta() {
+            const p = listaPerguntas[atual];
+            const total = listaPerguntas.length;
+
+            document.getElementById('perguntaNumero').textContent = 'Pergunta ' + (atual + 1);
+            document.getElementById('perguntaTexto').textContent = p.enunciado;
+            document.getElementById('labelPergunta').textContent = 'Pergunta ' + (atual + 1) + ' de ' + total;
+            document.getElementById('labelAcertos').textContent = acertos + (acertos !== 1 ? ' acertos' : ' acerto');
+            document.getElementById('progressoFill').style.width = (((atual + 1) / total) * 100) + '%';
+
+            const grid = document.getElementById('opcoesGrid');
+            grid.innerHTML = '';
+
+            p.opts.forEach((alt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'opcao-quiz-btn'; // Classe CSS externa mapeada
+                btn.setAttribute('data-id-alternativa', alt.idAlternativa);
+
+                const letraSpan = document.createElement('span');
+                letraSpan.className = 'letra-opcao';
+                letraSpan.textContent = letras[i];
+
+                btn.appendChild(letraSpan);
+                btn.appendChild(document.createTextNode(' ' + alt.texto));
+                btn.onclick = () => selecionarResposta(btn, alt, p);
+                grid.appendChild(btn);
+            });
+
+            const fb = document.getElementById('feedback');
+            fb.className = 'feedback'; // Reseta classes de feedback visual
+
+            const proxBtn = document.getElementById('proximoBtn');
+            proxBtn.classList.remove('visivel');
+            respondeu = false;
+        }
+
+        function selecionarResposta(btn, altEscolhida, pergunta) {
+            if (respondeu) return;
+            respondeu = true;
+
+            const acertou = altEscolhida.correta === 1;
+
+            document.querySelectorAll('#opcoesGrid button').forEach(b => {
+                b.disabled = true;
+                b.classList.add('opcao-desabilitada');
+                const idAlt = parseInt(b.getAttribute('data-id-alternativa'));
+                const alt = pergunta.opts.find(a => a.idAlternativa === idAlt);
+                if (alt && alt.correta === 1) {
+                    b.classList.add('opcao-correta');
+                }
+            });
+
+            const fb = document.getElementById('feedback');
+            if (acertou) {
+                acertos++;
+                btn.classList.add('opcao-correta');
+                fb.className = 'feedback correto-fb';
+                document.getElementById('feedbackTitulo').textContent = '✓ Correto!';
+            } else {
+                btn.classList.add('opcao-errada');
+                fb.className = 'feedback errado-fb';
+                document.getElementById('feedbackTitulo').textContent = '✗ Errou!';
+            }
+
+            document.getElementById('feedbackDesc').textContent = pergunta.explicacao;
+            document.getElementById('labelAcertos').textContent = acertos + (acertos !== 1 ? ' acertos' : ' acerto');
+
+            const proxBtn = document.getElementById('proximoBtn');
+            proxBtn.innerHTML = atual < listaPerguntas.length - 1
+                ? 'Próxima pergunta &rarr;'
+                : 'Ver resultado &rarr;';
+            proxBtn.classList.add('visivel');
+
+            salvarResposta(pergunta.idPergunta, altEscolhida.idAlternativa, acertou);
+        }
+
+        function salvarResposta(fkPergunta, fkAlternativa, acertou) {
+            if (!fkUsuario) {
+                console.log('fkUsuario está vazio:', fkUsuario);
+                return;
+            }
+
+            fetch('/salvarRespostas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fkUsuario, fkPergunta, fkAlternativa, acerto: acertou ? 1 : 0 })
+            })
+                .then(res => res.json())
+                .then(dados => console.log('Resposta salva:', dados))
+                .catch(err => console.error('Erro ao salvar resposta:', err));
+        }
+
+        function proximaPergunta() {
+            atual++;
+            if (atual >= listaPerguntas.length) mostrarResultado();
+            else renderPergunta();
+        }
+
+        function mostrarResultado() {
+            document.getElementById('blocoQuestao').classList.add('escondido');
+            document.getElementById('progressoWrap').classList.add('escondido');
+
+            const total = listaPerguntas.length;
+            const pct = acertos / total;
+            let icone, titulo, desc;
+
+            if (pct === 1) {
+                icone = '🏆'; titulo = 'Perfeito!';
+                desc = 'Incrível — você acertou tudo! É um verdadeiro especialista na coleção.';
+            } else if (pct >= 0.7) {
+                icone = '🎯'; titulo = 'Muito bem!';
+                desc = 'Você conhece bastante sobre os iPhones da coleção. Quase lá para o placar perfeito!';
+            } else if (pct >= 0.4) {
+                icone = '📱'; titulo = 'Bom esforço!';
+                desc = 'Você sabe o básico! Que tal rever os modelos na página inicial e tentar de novo?';
+            } else {
+                icone = '🤔'; titulo = 'Continue estudando!';
+                desc = 'Não desanime! Explore a coleção na página inicial e volte mais preparado.';
+            }
+
+            document.getElementById('resultadoIcone').innerHTML = icone;
+            document.getElementById('resultadoPlacar').textContent = acertos;
+            document.getElementById('resultadoTotal').textContent = 'de ' + total + ' acertos';
+            document.getElementById('resultadoTitulo').textContent = titulo;
+            document.getElementById('resultadoDesc').textContent = desc;
+            document.getElementById('resultadoCard').classList.add('visivel-bloco');
+        }
+
+        function reiniciarQuiz() {
+            atual = 0; acertos = 0; respondeu = false;
+            listaPerguntas = embaralhar(listaPerguntas).map(p => ({
+                ...p,
+                opts: embaralhar(p.opts)
+            }));
+            document.getElementById('blocoQuestao').classList.remove('escondido');
+            document.getElementById('progressoWrap').classList.remove('escondido');
+            document.getElementById('resultadoCard').classList.remove('visivel-bloco');
+            renderPergunta();
+        }
+    </script>
+</body>
+
+</html>

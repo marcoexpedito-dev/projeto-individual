@@ -1,0 +1,409 @@
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --fundo: #161618;
+            --superficie: #212124;
+            --borda: rgba(250, 250, 252, 0.12);
+            --ciano: #32b9cd;
+            --rosa: #ED145B;
+            --texto: #FAFAFCCC;
+            --texto-suave: #666;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--fundo);
+            color: var(--texto);
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 64px;
+            background-color: rgba(22, 22, 24, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--borda);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+        }
+
+        .marca-cabecalho {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--texto);
+            letter-spacing: 0.02em;
+        }
+
+        .marca-cabecalho span {
+            color: var(--ciano);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--texto-suave);
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--texto);
+        }
+
+        nav a.ativo {
+            color: var(--ciano);
+            font-weight: 700;
+        }
+
+        nav .botao-login {
+            background-color: var(--ciano);
+            color: #000;
+            border-radius: 6px;
+            padding: 7px 18px;
+            font-weight: 700;
+            font-size: 13px;
+            transition: background-color 0.2s;
+        }
+
+        nav .botao-login:hover {
+            background-color: #29a3b5;
+            color: #000;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('../assets/imgs/steve.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.18;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right,
+                    var(--fundo) 40%,
+                    transparent 100%);
+        }
+
+        .conteudo-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .etiqueta-hero {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--ciano);
+            margin-bottom: 20px;
+        }
+
+        .titulo-hero {
+            font-size: clamp(42px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1.0;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .titulo-hero span {
+            color: var(--ciano);
+        }
+
+        .subtitulo-hero {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--texto-suave);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 420px;
+        }
+
+        .acoes-hero {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .botao-primario {
+            background-color: var(--ciano);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 32px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition:
+                background-color 0.2s,
+                transform 0.15s;
+            letter-spacing: 0.04em;
+        }
+
+        .botao-primario:hover {
+            background-color: #29a3b5;
+            transform: translateY(-2px);
+        }
+
+        .botao-secundario {
+            background: none;
+            color: var(--texto);
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            padding: 14px 32px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition:
+                border-color 0.2s,
+                color 0.2s;
+        }
+
+        .botao-secundario:hover {
+            border-color: var(--ciano);
+            color: var(--ciano);
+        }
+
+        /* ── BARRA DE ESTATÍSTICAS ── */
+        .barra-estatisticas {
+            background-color: var(--superficie);
+            border-top: 1px solid var(--borda);
+            border-bottom: 1px solid var(--borda);
+            padding: 28px 60px;
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .estatistica {
+            text-align: center;
+        }
+
+        .numero-estatistica {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--ciano);
+            line-height: 1;
+        }
+
+        .rotulo-estatistica {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--texto-suave);
+            margin-top: 4px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .colecao {
+            padding: 100px 60px;
+        }
+
+        .cabecalho-secao {
+            margin-bottom: 60px;
+        }
+
+        .etiqueta-secao {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--ciano);
+            margin-bottom: 12px;
+        }
+
+        .titulo-secao {
+            font-size: 36px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .grade-iphones {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1px;
+            background-color: var(--borda);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-iphone {
+            background-color: var(--fundo);
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: background-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-iphone:hover {
+            background-color: var(--superficie);
+        }
+
+        .card-iphone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background:
+                linear-gradient(to right,
+                    var(--ciano),
+                    transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card-iphone:hover::before {
+            opacity: 1;
+        }
+
+        .container-imagem-card {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-imagem-card img {
+            max-height: 130px;
+            max-width: 100%;
+            object-fit: contain;
+            filter:
+                drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+            transition: transform 0.3s;
+        }
+
+        .card-iphone:hover .container-imagem-card img {
+            transform: translateY(-6px);
+        }
+
+        .modelo-card {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ciano);
+        }
+
+        .nome-card {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .descricao-card {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--texto-suave);
+            line-height: 1.7;
+        }
+
+        .chamada-quiz {
+            margin: 0 60px 100px;
+            background-color: var(--superficie);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chamada-quiz::before {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle,
+                    rgba(50, 185, 205, 0.1) 0%,
+                    transparent 70%);
+        }
+
+        .texto-chamada-quiz h3 {
+            font-size: 30px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .texto-chamada-quiz p {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--texto-suave);
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: var(--superficie);
+            border-top: 1px solid var(--borda);
+            padding: 32px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer span {
+            font-size: 13px;
+            color: var(--texto-suave);
+        }
+
+        footer .versao {
+            font-size: 11px;
+            color: #444;
+        }

@@ -2,317 +2,300 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/apple_logo_icon_147318.svg" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPhones | Página Inicial</title>
-
-    
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
+    <title>iPhones | Dashboard</title>
+    <link rel="icon" href="../assets/icon/apple_logo_icon_147318.svg">
     <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="../js/alerta.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboards.css">
 </head>
-
-<!-- <body onload=" atualizarFeed()"> -->
 
 <body>
 
-    <div class="janela">
-        <div class="header-left">
-            <h1>iPhones | Minha Pequena Coleção</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="../simulador.html">
-                    <h3>Quiz</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="label">Coleção Pessoal</div>
+            <div class="title">iPhones | Minha<br>Pequena Coleção</div>
         </div>
 
-        <div class="dash">
-            <div id="alerta">
+        <div class="sidebar-user">
+            <div class="avatar" id="avatarLetra"><img src="../assets/imgs/av1.png" alt="usuario">U</div>
+            <div class="user-info">
+                <div class="name" id="b_usuario">Usuário</div>
+                <div class="role">Colecionador</div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-label">Menu</div>
+
+            <a class="nav-item active" href="./dashboard.html">
+                <span class="icon">▲</span> Gráficos
+            </a>
+
+            <a class="nav-item" href="./quiz.html">
+                <span class="icon">◈</span> Quiz
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="limparSessao()">
+                <span class="icon">→</span> Sair da conta
+            </button>
+        </div>
+    </aside>
+
+    <div class="main">
+
+        <div class="topbar">
+            <div class="topbar-title">Dashboard <span>/ Gráficos</span></div>
+            <div class="topbar-right">
+                <span class="greeting">Olá, <strong id="topbar_usuario">usuário</strong>!</span>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <p class="page-label">Desempenho</p>
+                    <h2>Seus resultados no Quiz</h2>
+                </div>
             </div>
 
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            <div class="stat-cards" id="statCards">
+                <div class="stat-card cyan">
+                    <div class="stat-card-label">Total de respostas</div>
+                    <div class="stat-card-value" id="statTotal">—</div>
+                    <div class="stat-card-sub">perguntas respondidas</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-card-label">Acertos</div>
+                    <div class="stat-card-value" id="statAcertos">—</div>
+                    <div class="stat-card-sub">respostas corretas</div>
+                </div>
+                <div class="stat-card pink">
+                    <div class="stat-card-label">Erros</div>
+                    <div class="stat-card-value" id="statErros">—</div>
+                    <div class="stat-card-sub">respostas incorretas</div>
+                </div>
+                <div class="stat-card white">
+                    <div class="stat-card-label">Aproveitamento</div>
+                    <div class="stat-card-value" id="statPct">—</div>
+                    <div class="stat-card-sub">de acertos</div>
+                </div>
             </div>
-            <div id="graficos">
+
+
+            <div class="content-grid">
+
+                <div class="block">
+                    <div class="block-header">
+                        <h3>Acertos vs Erros</h3>
+                        <span class="block-label">Todas as tentativas</span>
+                    </div>
+                    <div class="block-body">
+                        <div id="chartContainer" class="chart-loading">
+                            <div class="spinner"></div>
+                            <span>Carregando dados...</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="display:flex; flex-direction:column; gap:24px;">
+
+
+                    <div class="quiz-block">
+                        <span class="ql">Quiz</span>
+                        <h3>Pronto para<br>tentar de novo?</h3>
+                        <p>Responda as perguntas e melhore seu aproveitamento. Cada tentativa conta!</p>
+                        <a href="./quiz.html" class="btn-quiz">Fazer o quiz →</a>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">
+                            <h3>A Coleção</h3>
+                            <span class="block-label">7 modelos</span>
+                        </div>
+                        <div class="iphone-list">
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone4.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">1ª Geração</div>
+                                    <div class="name">iPhone 4</div>
+                                </div>
+                                <span class="iphone-item-year">2010</span>
+                            </div>
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone-5.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">2ª Geração</div>
+                                    <div class="name">iPhone 5</div>
+                                </div>
+                                <span class="iphone-item-year">2012</span>
+                            </div>
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone-6s.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">3ª Geração</div>
+                                    <div class="name">iPhone 6s</div>
+                                </div>
+                                <span class="iphone-item-year">2015</span>
+                            </div>
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone-se.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">4ª Geração</div>
+                                    <div class="name">iPhone SE</div>
+                                </div>
+                                <span class="iphone-item-year">2016</span>
+                            </div>
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone-7.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">5ª Geração</div>
+                                    <div class="name">iPhone 7</div>
+                                </div>
+                                <span class="iphone-item-year">2016</span>
+                            </div>
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone-x.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">6ª Geração</div>
+                                    <div class="name">iPhone X</div>
+                                </div>
+                                <span class="iphone-item-year">2017</span>
+                            </div>
+                            <div class="iphone-item">
+                                <img src="../assets/imgs/iphone-xr.png" alt="">
+                                <div class="iphone-item-info">
+                                    <div class="model">7ª Geração</div>
+                                    <div class="name">iPhone XR</div>
+                                </div>
+                                <span class="iphone-item-year">2018</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
     </div>
 
+    <div id="alerta"></div>
 
 </body>
 
 </html>
 
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    let proximaAtualizacao;
+    var nomeUsuario = sessionStorage.NOME_USUARIO || 'Usuário';
+    document.getElementById('b_usuario').textContent = nomeUsuario;
+    document.getElementById('topbar_usuario').textContent = nomeUsuario;
+    document.getElementById('avatarLetra').textContent = nomeUsuario.charAt(0).toUpperCase();
 
-    window.onload = exibirAquariosDoUsuario();
 
-    function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-        aquarios.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-            `
+    window.onload = function () {
+        carregarGraficoQuiz();
+    };
 
-            document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
-                    </div>
-                </div>
-            `
+    function carregarGraficoQuiz() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var container = document.getElementById('chartContainer');
 
-            obterDadosGrafico(item.id)
-        });
-
-        if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
+        if (!idUsuario) {
+            container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠</div><span>Sessão não encontrada.<br>Faça login novamente.</span></div>';
+            return;
         }
-    }
 
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
-
-    function exibirAquario(idAquario) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
-
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idAquario) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
+        fetch('/salvarRespostas/usuario/' + idUsuario)
+            .then(function (res) {
+                if (res.status === 404) {
+                    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><span>Nenhum dado ainda.<br>Faça o quiz para ver seu desempenho!</span></div>';
+                    return null;
                 }
-                elementoAtual.classList.add("display-none")
+                if (!res.ok) throw new Error('Erro ' + res.status);
+                return res.json();
+            })
+            .then(function (dados) {
+                if (!dados) return;
 
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
-
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idAquario}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
-
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
-    }
-
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
-
-        alterarTitulo(idAquario)
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    plotarGrafico(resposta, idAquario);
-
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
-
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
-
-        console.log('iniciando plotagem do gráfico...');
-
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
-
-        // Criando estrutura para plotar gráfico - dados
-        let dados = {
-            labels: labels,
-            datasets: [{
-                label: 'Umidade',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
-            config
-        );
-
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    }
+                var acertos = dados.filter(function (r) { return parseInt(r.acerto) === 1; }).length;
+                var erros = dados.filter(function (r) { return parseInt(r.acerto) === 0; }).length;
+                var total = dados.length;
+                var pct = total > 0 ? Math.round((acertos / total) * 100) : 0;
 
 
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idAquario, dados, myChart) {
+                document.getElementById('statTotal').textContent = total;
+                document.getElementById('statAcertos').textContent = acertos;
+                document.getElementById('statErros').textContent = erros;
+                document.getElementById('statPct').textContent = pct + '%';
 
 
+                container.innerHTML = '<canvas id="graficoQuiz"></canvas>';
+                container.className = 'chart-wrap';
 
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    obterdados(idAquario);
-                    // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
-                    avisoCaptura.innerHTML = ""
-
-
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-
-                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
+                new Chart(document.getElementById('graficoQuiz'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Acertos', 'Erros'],
+                        datasets: [{
+                            data: [acertos, erros],
+                            backgroundColor: ['rgba(50,185,205,0.85)', 'rgba(237,20,91,0.85)'],
+                            borderColor: ['#32b9cd', '#ED145B'],
+                            borderWidth: 2,
+                            borderRadius: 12,
+                            borderSkipped: false,
+                            barThickness: 140
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: 10
+                            
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#212124',
+                                borderColor: 'rgba(250,250,252,0.1)',
+                                borderWidth: 1,
+                                titleColor: '#FAFAFCCC',
+                                bodyColor: '#888',
+                                padding: 12,
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { stepSize: 1, color: '#666', font: { family: 'Barlow', size: 12 } },
+                                grid: { color: 'rgba(255,255,255,0.05)' },
+                                border: { color: 'transparent' }
+                            },
+                            x: {
+                                ticks: { color: '#aaa', font: { family: 'Barlow', size: 13, weight: '700' } },
+                                grid: { display: false },
+                                border: { color: 'transparent' }
+                            }
+                        }
                     }
-
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            })
+            .catch(function (err) {
+                console.error(err);
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠</div><span>Erro ao carregar dados.</span></div>';
             });
-
     }
 </script>
