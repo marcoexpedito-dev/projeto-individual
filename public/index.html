@@ -321,7 +321,7 @@
             <div class="calc-input">
                 <div class="calc-input-wrap">
                     <label class="calc-rotulo" for="calcAno">Ano de nascimento</label>
-                    <input type="number" id="calcAno" class="calc-campo" placeholder="1998" min="1900" max="2025" />
+                    <input type="number" id="calcAno" class="calc-campo" placeholder="1998" min="2007" max="2026" />
                     <div class="calc-erro" id="calcErro"></div>
                 </div>
                 <button class="calc-btn" onclick="calcularInline()">
@@ -353,10 +353,10 @@
             { ano: 2018, modelo: "iPhone XS / XR", chip: "Apple A12 Bionic", camera: "12 MP", tela: '5.8" / 6.1"' },
             { ano: 2019, modelo: "iPhone 11 / Pro", chip: "Apple A13 Bionic", camera: "12 MP", tela: '6.1" / 5.8"' },
             { ano: 2020, modelo: "iPhone 12 / Mini", chip: "Apple A14 (5nm)", camera: "12 MP", tela: '6.1" / 5.4"' },
-            { ano: 2021, modelo: "iPhone 13 / Pro", chip: "Apple A15 Bionic", camera: "12 MP", tela: '6.1" ProMotion' },
-            { ano: 2022, modelo: "iPhone 14 / Pro", chip: "A15 / A16 Bionic", camera: "48 MP", tela: '6.1" OLED' },
-            { ano: 2023, modelo: "iPhone 15 / Pro", chip: "A16 / A17 Pro", camera: "48 MP", tela: '6.1" OLED' },
-            { ano: 2024, modelo: "iPhone 16 / Pro", chip: "A18 / A18 Pro", camera: "48 MP", tela: '6.1" / 6.3"' },
+            { ano: 2021, modelo: "iPhone 13 / Pro/ Pro Max", chip: "Apple A15 Bionic", camera: "12 MP", tela: '6.1" ProMotion' },
+            { ano: 2022, modelo: "iPhone 14 / Pro/ Pro Max", chip: "A15 / A16 Bionic", camera: "48 MP", tela: '6.1" OLED' },
+            { ano: 2023, modelo: "iPhone 15 / Pro/ Pro Max", chip: "A16 / A17 Pro", camera: "48 MP", tela: '6.1" OLED' },
+            { ano: 2024, modelo: "iPhone 16 / Pro/ Pro Max", chip: "A18 / A18 Pro", camera: "48 MP", tela: '6.1" / 6.3"' },
             { ano: 2025, modelo: "iPhone 17/ Pro/ Pro Max", chip: "A19/ A19 Pro", camera: "48MP", tela: '6.1" / 6.3' }
         ];
 
@@ -370,8 +370,8 @@
             erroEl.style.display = "none";
 
 
-            if (!ano || isNaN(ano) || ano < 1900 || ano > 2025) {
-                erroEl.textContent = "Insira um ano entre 1900 e 2025.";
+            if (!ano || isNaN(ano) || ano < 2007 || ano > 2026) {
+                erroEl.textContent = "Insira um ano entre 2007 e 2026.";
                 erroEl.style.display = "block";
                 return;
             }
@@ -391,16 +391,16 @@
 
 
             const idadeNaEpoca = iphone.ano - ano;
-            const anosSinceLaunch = 2025 - iphone.ano;
+            const anosSinceLaunch = 2026 - iphone.ano;
 
 
             let fraseIdade;
             if (idadeNaEpoca < 0) {
                 fraseIdade = "Você <strong>ainda não havia nascido</strong> quando saiu.";
             } else if (idadeNaEpoca === 0) {
-                fraseIdade = "Você nasceu <strong>no mesmo ano</strong> deste iPhone!";
+                fraseIdade =  "Lançou " + anosSinceLaunch + " anos atrás.";
             } else {
-                fraseIdade = "Você tinha <strong>" + idadeNaEpoca + " anos</strong> quando saiu · " + anosSinceLaunch + " anos atrás.";
+                fraseIdade = "Lançou " + anosSinceLaunch + " anos atrás.";
             }
 
             resEl.classList.add("tem-resultado");

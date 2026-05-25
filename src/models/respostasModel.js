@@ -4,8 +4,8 @@ const RespostaModel = {
  
     async salvar({ fkUsuario, fkPergunta, fkAlternativa, acerto }) {
         var instrucaoSql = `
-            INSERT INTO respostas (fkUsuario, fkPergunta, fkAlternativa, acerto)
-            VALUES (${fkUsuario}, ${fkPergunta}, ${fkAlternativa}, ${acerto ? 1 : 0})
+            INSERT INTO respostas (fkUsuario, fkPergunta, dtResposta, acerto)
+            VALUES (${fkUsuario}, ${fkPergunta}, now(), ${acerto ? 1 : 0})
         `; 
         return database.executar(instrucaoSql);
     },

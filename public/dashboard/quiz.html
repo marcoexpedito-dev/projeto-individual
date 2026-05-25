@@ -138,7 +138,7 @@
 
             p.opts.forEach((alt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'opcao-quiz-btn'; // Classe CSS externa mapeada
+                btn.className = 'opcao-quiz-btn';
                 btn.setAttribute('data-id-alternativa', alt.idAlternativa);
 
                 const letraSpan = document.createElement('span');
@@ -152,7 +152,7 @@
             });
 
             const fb = document.getElementById('feedback');
-            fb.className = 'feedback'; // Reseta classes de feedback visual
+            fb.className = 'feedback'; 
 
             const proxBtn = document.getElementById('proximoBtn');
             proxBtn.classList.remove('visivel');

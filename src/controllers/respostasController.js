@@ -3,9 +3,9 @@ const RespostaModel = require('../models/respostasModel');
 const RespostaController = {
  
     async salvar(req, res) {
-        const { fkUsuario, fkPergunta, fkAlternativa, acerto } = req.body;
+        const { fkUsuario, fkPergunta, dtResposta, acerto } = req.body;
  
-        if (!fkUsuario || !fkPergunta || !fkAlternativa || acerto === undefined) {
+        if (!fkUsuario || !fkPergunta  || acerto === undefined) {
             return res.status(400).json({ erro: 'Dados incompletos.' });
         }
  
@@ -13,7 +13,6 @@ const RespostaController = {
             const idResposta = await RespostaModel.salvar({
                 fkUsuario,
                 fkPergunta,
-                fkAlternativa,
                 acerto
             });
  

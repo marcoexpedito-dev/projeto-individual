@@ -21,6 +21,7 @@ function listarTodasComAlternativas() {
         SELECT 
             p.idPergunta,
             p.enunciado,
+            p.explicacao,
             a.idAlternativa,
             a.texto,
             a.correta

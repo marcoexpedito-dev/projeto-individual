@@ -12,7 +12,7 @@ function encontrarPerguntas(req, res) {
             }
         }).catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+            console.log("Houve um erro ao buscar as ultimas perguntas.", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
         });
 }
@@ -46,6 +46,7 @@ function listarTodasComAlternativas(req, res){
                 mapa[linha.idPergunta] = {
                     idPergunta: linha.idPergunta,
                     enunciado: linha.enunciado,
+                    explicacao: linha.explicacao,
                     opts: []
                 };
             }
