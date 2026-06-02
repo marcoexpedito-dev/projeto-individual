@@ -286,7 +286,7 @@
         <div class="texto-chamada-quiz">
 
             <h3>
-                Quanto você sabe sobre a coleção?
+                Quanto você sabe sobre os iPhones da coleção?
             </h3>
 
             <p>
@@ -330,7 +330,7 @@
             </div>
 
             <div class="calc-resultado" id="calcResultado">
-                <p class="calc-placeholder">← seu resultado aparece aqui</p>
+                <p class="calc-placeholder">Seu resultado aparece aqui ← </p>
             </div>
 
         </div>
@@ -391,16 +391,14 @@
 
 
             const idadeNaEpoca = iphone.ano - ano;
-            const anosSinceLaunch = 2026 - iphone.ano;
+            const anosDesdeLancamento = 2026 - iphone.ano;
 
 
             let fraseIdade;
             if (idadeNaEpoca < 0) {
                 fraseIdade = "Você <strong>ainda não havia nascido</strong> quando saiu.";
-            } else if (idadeNaEpoca === 0) {
-                fraseIdade =  "Lançou " + anosSinceLaunch + " anos atrás.";
             } else {
-                fraseIdade = "Lançou " + anosSinceLaunch + " anos atrás.";
+                fraseIdade = "Lançou " + anosDesdeLancamento + " anos atrás.";
             }
 
             resEl.classList.add("tem-resultado");

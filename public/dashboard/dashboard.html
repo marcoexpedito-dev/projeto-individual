@@ -8,7 +8,6 @@
     <title>iPhones | Dashboard</title>
     <link rel="icon" href="../assets/icon/apple_logo_icon_147318.svg">
     <script src="../js/sessao.js"></script>
-    <script src="../js/alerta.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;600;700;800;900&display=swap"
@@ -25,7 +24,7 @@
         </div>
 
         <div class="sidebar-user">
-            <div class="avatar" id="avatarLetra"><img src="../assets/imgs/av1.png" alt="usuario">U</div>
+            <img class="avatar" id="avatarLetra" src="../assets/imgs/av4.png" alt="usuario">
             <div class="user-info">
                 <div class="name" id="b_usuario">Usuário</div>
                 <div class="role">Colecionador</div>
@@ -57,7 +56,6 @@
         <div class="topbar">
             <div class="topbar-title">Dashboard <span>/ Gráficos</span></div>
             <div class="topbar-right">
-                <span class="greeting">Olá, <strong id="topbar_usuario">usuário</strong>!</span>
             </div>
         </div>
 
@@ -187,7 +185,6 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -198,17 +195,6 @@
 </html>
 
 <script>
-
-    var nomeUsuario = sessionStorage.NOME_USUARIO || 'Usuário';
-    document.getElementById('b_usuario').textContent = nomeUsuario;
-    document.getElementById('topbar_usuario').textContent = nomeUsuario;
-    document.getElementById('avatarLetra').textContent = nomeUsuario.charAt(0).toUpperCase();
-
-
-    window.onload = function () {
-        carregarGraficoQuiz();
-    };
-
     function carregarGraficoQuiz() {
         var idUsuario = sessionStorage.ID_USUARIO;
         var container = document.getElementById('chartContainer');
@@ -246,7 +232,7 @@
                 container.className = 'chart-wrap';
 
                 new Chart(document.getElementById('graficoQuiz'), {
-                    type: 'bar',
+                    type: 'doughnut',
                     data: {
                         labels: ['Acertos', 'Erros'],
                         datasets: [{
@@ -264,10 +250,10 @@
                         maintainAspectRatio: false,
                         layout: {
                             padding: 10
-                            
+
                         },
                         plugins: {
-                            legend: { display: false },
+                            legend: { display: true },
                             tooltip: {
                                 backgroundColor: '#212124',
                                 borderColor: 'rgba(250,250,252,0.1)',
@@ -298,4 +284,14 @@
                 container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠</div><span>Erro ao carregar dados.</span></div>';
             });
     }
+
+
+    window.onload = function () {
+        carregarGraficoQuiz();
+    };
+
+    var nomeUsuario = sessionStorage.NOME_USUARIO || 'Usuário';
+    document.getElementById('b_usuario').textContent = nomeUsuario;
+    document.getElementById('topbar_usuario').textContent = nomeUsuario;
+    document.getElementById('avatarLetra').textContent = nomeUsuario.charAt(0).toUpperCase();
 </script>
